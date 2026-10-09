@@ -86,12 +86,6 @@ export const PRODUCTS = [
   { id: 'fries-l', category: 'sides', name: 'Papas grandes', price: 8500, desc: 'Para compartir (o no)' },
   { id: 'fries-box', category: 'sides', name: 'Papas Box', price: 13000, desc: 'Con panceta y cheddar fundido', tags: ['Top'] },
 
-  // ponytail: bebidas y postres no figuran en la carta pública; son placeholders de demo.
-  { id: 'coke', category: 'drinks', name: 'Gaseosa 500ml', price: 2500, desc: 'Línea Coca-Cola', demo: true },
-  { id: 'beer', category: 'drinks', name: 'Cerveza artesanal', price: 4500, desc: 'Pinta de cervecería local', demo: true },
-  { id: 'water', category: 'drinks', name: 'Agua', price: 1800, desc: 'Con o sin gas', demo: true },
-  { id: 'brownie', category: 'desserts', name: 'Brownie', price: 4000, desc: 'Con dulce de leche', demo: true },
-  { id: 'cookie', category: 'desserts', name: 'Cookie XL', price: 3000, desc: 'Chips de chocolate', demo: true },
 ]
 
 export const EXTRAS = [
@@ -107,8 +101,6 @@ export const SAUCES = ['Tasty', 'Box', 'Barbacoa']
 export const CATEGORIES = [
   { id: 'burgers', label: 'Hamburguesas' },
   { id: 'sides', label: 'Papas' },
-  { id: 'drinks', label: 'Bebidas' },
-  { id: 'desserts', label: 'Postres' },
   { id: 'veggie', label: 'Veggie' },
 ]
 

@@ -75,7 +75,7 @@ function Site() {
 
       <footer className="border-t border-white/10 py-10 text-center text-sm text-cream/50">
         <p className="font-display text-3xl uppercase text-mustard">Burger Box</p>
-        <p className="mt-1">{BUSINESS.tagline} · Demo / prototipo</p>
+        <p className="mt-1">{BUSINESS.tagline}</p>
       </footer>
 
       <CartButton count={cart.reduce((s, l) => s + l.qty, 0)} onClick={() => setOpen(true)} />

@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { CakeSlice, CupSoda, Layers, Plus, Utensils, X } from 'lucide-react'
+import { Layers, Plus, Utensils, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { BREADS, CATEGORIES, PRODUCTS, SAUCES, money } from '../data/menu'
 import BurgerLab from './BurgerLab'
 import ExplodedBurger from './ExplodedBurger'
 
-const ICON = { sides: Utensils, drinks: CupSoda, desserts: CakeSlice }
+const ICON = { sides: Utensils }
 
 export default function Menu({ onAdd }) {
   const [cat, setCat] = useState('burgers')
@@ -99,7 +99,6 @@ export default function Menu({ onAdd }) {
                     {p.tags?.map((t) => (
                       <span key={t} className="rounded-full bg-flame/15 px-2 py-0.5 text-[11px] font-semibold uppercase text-flame">{t}</span>
                     ))}
-                    {p.demo && <span className="rounded-full bg-white/10 px-2 py-0.5 text-[11px] uppercase text-cream/50">Demo</span>}
                   </div>
 
                   <div className="mt-4 flex gap-2">
