@@ -3,13 +3,15 @@ import { MapPin, MessageCircle, Sparkles, Star } from 'lucide-react'
 import { useState } from 'react'
 import { BUSINESS, PRODUCTS } from '../data/menu'
 import { whatsappUrl } from '../lib/cart'
+import { useBranch } from '../lib/branch'
 import ExplodedBurger from './ExplodedBurger'
 
 const hero = PRODUCTS.find((p) => p.id === 'bacon')
-const wa = whatsappUrl('¡Hola Burger Box! Quiero hacer un pedido 🍔')
 
 export default function Hero() {
   const [exploded, setExploded] = useState(false)
+  const { branch } = useBranch()
+  const wa = whatsappUrl(`¡Hola Burger Box ${branch.label}! Quiero hacer un pedido 🍔`, branch.whatsapp)
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 600], [0, 120])
   const rotate = useTransform(scrollY, [0, 600], [0, -8])
@@ -24,7 +26,7 @@ export default function Hero() {
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
         <div>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-coal/80 px-4 py-2 text-xs font-semibold uppercase tracking-wider">
-            <Star size={14} className="fill-mustard text-mustard" /> {BUSINESS.rating} en Google · Luján de Cuyo
+            <Star size={14} className="fill-mustard text-mustard" /> {BUSINESS.rating} en Google · {branch.label}
           </motion.p>
 
           <h1 className="font-display text-6xl uppercase leading-[0.9] sm:text-7xl xl:text-8xl">

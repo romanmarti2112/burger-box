@@ -1,6 +1,31 @@
 // Datos tomados de la carta pública (Canva vía linktr.ee/burger_box), Instagram y Google Maps.
 // Precios en ARS. Alérgenos son estimaciones de demo, no datos oficiales.
 
+export const BRANCHES = {
+  lujan: {
+    id: 'lujan',
+    label: 'Luján de Cuyo',
+    address: 'Calle San Martín 4426, Mayor Drummond, Luján de Cuyo, Mendoza',
+    venue: 'Dentro de Charme',
+    phone: '0261 623-0698',
+    // ponytail: número inferido del teléfono público; confirmar que es el WhatsApp de pedidos.
+    whatsapp: '5492616230698',
+    mapsUrl: 'https://maps.app.goo.gl/WNeLGLLyQVgLgdwV6',
+    coords: { lat: -32.9974501, lng: -68.8659294 },
+  },
+  maipu: {
+    id: 'maipu',
+    label: 'Maipú',
+    // ponytail: dirección exacta de Maipú pendiente; coords tomadas del link de Maps.
+    address: 'Maipú, Mendoza',
+    venue: null,
+    phone: '0261 333-7725',
+    whatsapp: '5492613337725',
+    mapsUrl: 'https://maps.app.goo.gl/Jfju58UEv9jGVWWj8',
+    coords: { lat: -32.9769446, lng: -68.7944292 },
+  },
+}
+
 export const BUSINESS = {
   name: 'Burger Box',
   tagline: 'Adictos al sabor.',

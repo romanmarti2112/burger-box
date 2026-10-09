@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Minus, Plus, Send, ShoppingBag, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { EXTRAS, money } from '../data/menu'
+import { useBranch } from '../lib/branch'
 import { linePrice, totals, whatsappMessage, whatsappUrl } from '../lib/cart'
 
 export function CartButton({ count, onClick }) {
@@ -29,6 +30,7 @@ export default function Cart({ open, onClose, cart, onQty }) {
   const [mode, setMode] = useState('pickup')
   const [address, setAddress] = useState('')
   const [cash, setCash] = useState(true)
+  const { branch } = useBranch()
   const { subtotal, discount, total } = totals(cart, cash)
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function Cart({ open, onClose, cart, onQty }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
-  const send = () => window.open(whatsappUrl(whatsappMessage(cart, { name, mode, address, cash })), '_blank', 'noopener')
+  const send = () => window.open(whatsappUrl(whatsappMessage(cart, { name, mode, address, cash, branch: branch.label }), branch.whatsapp), '_blank', 'noopener')
 
   return (
     <AnimatePresence>

@@ -1,15 +1,28 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { MapPin } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import Cart, { CartButton } from './components/Cart'
 import Hero from './components/Hero'
 import Location, { Instagram } from './components/Location'
 import Menu from './components/Menu'
+import BranchPicker from './components/BranchPicker'
 import { BUSINESS } from './data/menu'
+import { BranchProvider, useBranch } from './lib/branch'
 import { addLine, setQty } from './lib/cart'
 
 const STRIP = ['Smash', 'Cheddar x4', 'Salsa Box', '10% off efectivo', 'Papas incluidas', 'Martes a domingo 20 h']
 
 export default function App() {
+  return (
+    <BranchProvider>
+      <Site />
+      <BranchPicker />
+    </BranchProvider>
+  )
+}
+
+function Site() {
+  const { branch, setBranch } = useBranch()
   const [cart, setCart] = useState([])
   const [open, setOpen] = useState(false)
   const [toast, setToast] = useState(null)
@@ -33,6 +46,9 @@ export default function App() {
           <div className="flex items-center gap-5 text-sm font-semibold uppercase">
             <a href="#menu" className="hidden hover:text-mustard sm:block">Menú</a>
             <a href="#ubicacion" className="hidden hover:text-mustard sm:block">Ubicación</a>
+            <button type="button" onClick={() => setBranch(null)} className="flex items-center gap-1 rounded-full border border-white/15 px-3 py-1.5 hover:border-mustard hover:text-mustard">
+              <MapPin size={14} /> {branch.label}
+            </button>
             <a href={BUSINESS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-mustard">
               <Instagram />
             </a>

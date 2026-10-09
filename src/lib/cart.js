@@ -20,14 +20,14 @@ export function totals(cart, cash) {
   return { subtotal, discount, total: subtotal - discount }
 }
 
-export function whatsappMessage(cart, { name, mode, address, cash }) {
+export function whatsappMessage(cart, { name, mode, address, cash, branch }) {
   const { subtotal, discount, total } = totals(cart, cash)
   const lines = cart.map((l) => {
     const opts = [l.bread && `pan ${l.bread}`, l.sauce && `salsa ${l.sauce}`, ...(l.extras ?? []).map((id) => `+${EXTRAS.find((e) => e.id === id).name}`)].filter(Boolean)
     return `• ${l.qty}x ${l.product.name}${opts.length ? ` (${opts.join(', ')})` : ''} — ${money(linePrice(l) * l.qty)}`
   })
   return [
-    `¡Hola Burger Box! 🍔 Quiero hacer un pedido:`,
+    `¡Hola Burger Box${branch ? ` ${branch}` : ''}! 🍔 Quiero hacer un pedido:`,
     '',
     ...lines,
     '',
@@ -43,4 +43,4 @@ export function whatsappMessage(cart, { name, mode, address, cash }) {
     .join('\n')
 }
 
-export const whatsappUrl = (text) => `https://wa.me/${BUSINESS.whatsapp}?text=${encodeURIComponent(text)}`
+export const whatsappUrl = (text, whatsapp = BUSINESS.whatsapp) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(text)}`

@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
-import { Clock, MapPin, Navigation, Phone, Star } from 'lucide-react'
+import { Clock, MapPin, MessageCircle, Navigation, Star } from 'lucide-react'
 import { BUSINESS } from '../data/menu'
+import { whatsappUrl } from '../lib/cart'
+import { useBranch } from '../lib/branch'
 
 // lucide v1 ya no trae íconos de marcas.
 export const Instagram = ({ size = 20 }) => (
@@ -22,8 +24,8 @@ export function isOpenNow(date = new Date()) {
 }
 
 export default function Location() {
-  const { lat, lng } = BUSINESS.coords
-  const directions = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
+  const { branch } = useBranch()
+  const { lat, lng } = branch.coords
   const open = isOpenNow()
 
   return (
@@ -36,6 +38,7 @@ export default function Location() {
       <div className="mt-12 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative min-h-[360px] overflow-hidden rounded-3xl border border-white/10">
           <iframe
+            key={branch.id}
             title="Mapa Burger Box"
             src={`https://www.google.com/maps?q=${lat},${lng}&z=16&output=embed`}
             className="absolute inset-0 h-full w-full [filter:invert(.92)_hue-rotate(180deg)_saturate(.7)]"
@@ -49,8 +52,8 @@ export default function Location() {
 
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="flex flex-col gap-4">
           <Card icon={MapPin} title="Dirección">
-            {BUSINESS.address}
-            <span className="block text-cream/50">{BUSINESS.venue}</span>
+            {branch.address}
+            {branch.venue && <span className="block text-cream/50">{branch.venue}</span>}
           </Card>
           <Card icon={Clock} title="Horarios">
             <span className={`mb-2 inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-bold uppercase ${open ? 'bg-green-500/15 text-green-400' : 'bg-flame/15 text-flame'}`}>
@@ -64,8 +67,8 @@ export default function Location() {
             ))}
           </Card>
           <div className="grid grid-cols-2 gap-3">
-            <Action href={directions} icon={Navigation} label="Cómo llegar" primary />
-            <Action href={`tel:${BUSINESS.phone.replace(/\D/g, '')}`} icon={Phone} label="Llamar" />
+            <Action href={branch.mapsUrl} icon={Navigation} label="Cómo llegar" primary />
+            <Action href={whatsappUrl(`¡Hola Burger Box ${branch.label}!`, branch.whatsapp)} icon={MessageCircle} label="WhatsApp" />
             <Action href={BUSINESS.instagram} icon={Instagram} label="@burger_box__" wide />
           </div>
         </motion.div>
