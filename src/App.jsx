@@ -5,6 +5,7 @@ import Cart, { CartButton } from './components/Cart'
 import Hero from './components/Hero'
 import Location, { Instagram } from './components/Location'
 import Menu from './components/Menu'
+import DemoEnded from './components/DemoEnded'
 import BranchPicker from './components/BranchPicker'
 import { BUSINESS } from './data/menu'
 import { BranchProvider, useBranch } from './lib/branch'
@@ -12,11 +13,14 @@ import { addLine, setQty } from './lib/cart'
 
 const STRIP = ['Smash', 'Cheddar x4', 'Salsa Box', '10% off efectivo', 'Papas incluidas', 'Martes a domingo 20 h']
 
+const DEMO_ENDED = true
+
 export default function App() {
   return (
     <BranchProvider>
       <Site />
       <BranchPicker />
+      {DEMO_ENDED && <DemoEnded />}
     </BranchProvider>
   )
 }
